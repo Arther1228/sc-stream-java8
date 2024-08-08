@@ -2,10 +2,10 @@ spring:
   application:
     name: sc-stream
   rabbitmq:
-    host: 172.16.99.5
+    host: 127.0.0.1
     port: 5672
     username: admin
-    password: sc.600990
+    password: test
 
   cloud:
     stream:
