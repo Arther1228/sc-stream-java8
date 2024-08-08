@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: sc-stream
+  rabbitmq:
+    host: 172.16.99.5
+    port: 5672
+    username: admin
+    password: sc.600990
+
+  cloud:
+    stream:
+      rabbit:
+        bindings:
+          ss007AutoProducer-out-0:
+            producer:
+              exchangeType: fanout
+              declareExchange: true
+          ss007AutoConsumer-in-0:
+            consumer:
+              exchangeType: fanout
+              declareExchange: true
+      bindings:
+        ss007AutoProducer-out-0:
+          destination: ss007-auto-topic
+          content-type: application/json
+          binder: rabbit
+        ss007AutoConsumer-in-0:
+          destination: ss007-auto-topic
+          group: ss007-group
+          binder: rabbit
+      #并不知道这个属性的作用
+      output-bindings: ss007AutoProducer
+    function:
+      #definition: ss007AutoConsumer
+      definition: ss007AutoProducer;ss007AutoConsumer
